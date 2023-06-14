@@ -5,12 +5,14 @@ import Centralbox from './components/Centralbox';
 import space from "public/space.jpg";
 import { Button, Modal } from 'react-bootstrap';
 import MarsRoverModal from './components/MarsRoverModal';
+import NearModal from './components/NearModal';
 
 function App() {
   
   const [isModal1Open, setIsModal1Open] = useState(false);
 
   const openModal1 = () => {
+    setIsModal3Open(false);
     setIsModal2Open(false);
     setIsModal1Open(true);
   };
@@ -22,12 +24,25 @@ function App() {
   const [isModal2Open, setIsModal2Open] = useState(false);
 
   const openModal2 = () => {
+    setIsModal3Open(false);
     setIsModal1Open(false);
     setIsModal2Open(true);
   };
 
   const closeModal2 = () => {
     setIsModal2Open(false);
+  };
+
+  const [isModal3Open, setIsModal3Open] = useState(false);
+
+  const openModal3 = () => {
+    setIsModal1Open(false);
+    setIsModal2Open(false);
+    setIsModal3Open(true);
+  };
+
+  const closeModal3 = () => {
+    setIsModal3Open(false);
   };
   
   return (
@@ -37,7 +52,7 @@ function App() {
           <div className="menu">
             <button onClick={isModal1Open?closeModal1:openModal1}>PICTURE OF THE DAY</button>
             <button onClick={isModal2Open?closeModal2:openModal2}>MARS ROVER</button>
-            <button>NEAR OBJECTS</button>
+            <button onClick={isModal3Open?closeModal3:openModal3}>NEAR OBJECTS</button>
           </div>
           <div className='content'>
             {isModal1Open && (
@@ -45,6 +60,9 @@ function App() {
             )}
             {isModal2Open && (
               <MarsRoverModal closeModal={closeModal2} />
+            )}
+            {isModal3Open && (
+              <NearModal closeModal={closeModal3} />
             )}
           </div>
         </div>

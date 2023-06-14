@@ -1,13 +1,95 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  height: 100%;
+  background-image: url('./images/space.jpg');
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.centralbox {
+  position: relative;
+  height: 90vh;
+  width: 130vh;
+  background-color: #222222;
+  opacity: .5;
+  border-radius: 10px;
+  border: 1px solid;
+  z-index: 1; /* Ensure the .centralbox element is above the background */
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  position: relative;
+  display: flex;
+  top: 0;
+  height: 10vh;
+  width: 100%;
+  background-color: rgb(34, 57, 126);
+  border: 2px solid rgb(54, 75, 139);
+  z-index: 2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+}
+
+.menu button {
+  width: calc(100% / 3); /* Adjust the number based on the number of buttons */
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.menu button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.menu button:active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.content {
+  position: relative;
+  flex-grow: 1;
+  margin: 10px;
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(100% - 20px);
+}
+
+/* Additional styles for the modal */
+.modal {
+  position: absolute;
+  z-index: 11;
+}
+
+.modal-content {
+  background-color: #222222;
+  color: white;
+  z-index: 11;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  color: white;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.modal-dialog {
+  margin: 40px auto;
+  width: 600px;
 }

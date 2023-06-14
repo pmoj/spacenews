@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AxiosRequest from "../axios/config";
 
-interface ApodModalProps {
+interface MarsRoverModalProps {
     closeModal: () => void;
   }
 
-const ApodModal: React.FC<ApodModalProps> = ({ closeModal }) => {
+const MarsRoverModal: React.FC<MarsRoverModalProps> = ({ closeModal }) => {
     
     const [day, month, year] = new Date().toLocaleDateString().split('/');
-    const date = `${year}-${month}-${day}`
+    // const date = `${year}-${month}-${day}`
+    const date = "2022-06-14"
 
     const [response, setResponse] = useState<any>([]);
 
     useEffect(() => {
 
-        AxiosRequest.get("/apod", {
+        AxiosRequest.get("/mars_rover", {
             params: { date: date },
         })
         .then((retorno: any) => {
-            setResponse(retorno.data)
+            setResponse(retorno.data.photos)
         })
         .catch(function(erro){
         })
@@ -28,11 +29,6 @@ const ApodModal: React.FC<ApodModalProps> = ({ closeModal }) => {
 
     useEffect(() => {
         console.log(response)
-        if (response.title) {
-            console.log(response.title)
-            console.log(response.date)
-            console.log(response.url)
-        }
     },[response])
 
     return (
@@ -42,15 +38,27 @@ const ApodModal: React.FC<ApodModalProps> = ({ closeModal }) => {
             <Modal.Title>{response.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <img className="modal-img" src={response.url} alt="Picture of the day" />
+            <img className="modal-img" src={response.url} alt="" />
+            <ul>
+                {response.length > 0 &&
+                    response.map(
+                        (foto: any, index: Key | null | undefined) => {
+                            return (
+                                <li key={index}>
+                                    <img className="modal-img" src={foto.img_src} alt="Picture" />
+                                </li>
+                            );
+                        }
+                    )
+                }
+            </ul>
           </Modal.Body>
           <Modal.Footer>
             <p>{response.explanation}</p>
-
           </Modal.Footer>
         </Modal>
       </>
     );
 }
 
-export default ApodModal;
+export default MarsRoverModal;
